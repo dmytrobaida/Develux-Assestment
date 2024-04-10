@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { input } from "@inquirer/prompts";
 
+import { CreatePullRequestOptions } from "./types";
+
 export function getAuthToken() {
   const env = getEnvVariables();
   const username = env.BITBUCKET_USERNAME;
@@ -18,7 +20,7 @@ export function getEnvVariables() {
   return envSchema.parse(process.env);
 }
 
-export async function getInputArguments() {
+export async function getInputArguments(): Promise<CreatePullRequestOptions> {
   return {
     packageWithVersion: await input({
       message: "Enter package with version you want to update",
@@ -59,5 +61,9 @@ export async function getInputArguments() {
         return z.string().trim().min(1).safeParse(value).success;
       },
     }),
+    // Hardcoded it because we only change package json
+    destFile: "package.json",
+    // Hardcoded because we will use main branch at the moment
+    srcBranch: "main",
   };
 }

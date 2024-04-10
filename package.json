@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsx --env-file=.env src/create-pull-request.ts",
+    "start": "tsx --env-file=.env src/index.ts",
     "lint": "eslint src/**/*.ts",
     "test": "jest"
   },

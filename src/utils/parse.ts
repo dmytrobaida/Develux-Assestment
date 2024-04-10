@@ -6,6 +6,7 @@ export function parsePackageWithVersion(packageWithVersion: string) {
   return packageWithVersion.split("@");
 }
 
+// dev dependecies, peer, etc...
 export function processPackageJson(
   packageJsonStr: string,
   packageWithVersion: string

@@ -1,6 +1,7 @@
 import { getAuthToken } from "./config";
+import { ScmApi } from "./types";
 
-export class BitBucketApi {
+export class BitBucketApi implements ScmApi {
   private repo: string;
   private commitCreator: string;
   private commitMessageBase: string;
@@ -15,7 +16,7 @@ export class BitBucketApi {
     branch: string,
     file: Buffer,
     destinationFile: string
-  ) {
+  ): Promise<[number, string, string]> {
     try {
       const formData = new FormData();
       formData.append(destinationFile, new Blob([file]));
@@ -36,11 +37,18 @@ export class BitBucketApi {
 
       return [res.status, res.statusText, await res.text()];
     } catch (err) {
-      throw new Error(err.toString());
+      if (err instanceof Error) {
+        throw new Error(err.toString());
+      }
+
+      throw new Error("Something went wrong!");
     }
   }
 
-  async createPullRequest(branch: string, title: string) {
+  async createPullRequest(
+    branch: string,
+    title: string
+  ): Promise<[number, string, string]> {
     try {
       const data = {
         title: title,
@@ -62,11 +70,15 @@ export class BitBucketApi {
 
       return [res.status, res.statusText, await res.text()];
     } catch (err) {
-      throw new Error(err.toString());
+      if (err instanceof Error) {
+        throw new Error(err.toString());
+      }
+
+      throw new Error("Something went wrong!");
     }
   }
 
-  async readFile(branch: string, path: string) {
+  async readFile(branch: string, path: string): Promise<string> {
     try {
       const res = await fetch(`${this.repo}/src/${branch}/${path}`, {
         headers: {
@@ -76,7 +88,11 @@ export class BitBucketApi {
 
       return await res.text();
     } catch (err) {
-      throw new Error(err.toString());
+      if (err instanceof Error) {
+        throw new Error(err.toString());
+      }
+
+      throw new Error("Something went wrong!");
     }
   }
 }

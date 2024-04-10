@@ -1,20 +1,20 @@
-import { BitBucketApi } from "./utils/api";
-import { getInputArguments } from "./utils/config";
 import { processPackageJson } from "./utils/parse";
+import { CreatePullRequestOptions, ScmApi } from "./utils/types";
 
-// Hardcoded it because we only change package json
-const destFile = "package.json";
-// Hardcoded because we will use main branch at the moment
-const srcBranch = "main";
-
-async function main() {
+export async function createPullRequest(
+  api: ScmApi,
+  options: CreatePullRequestOptions
+) {
   try {
     // Get all command line arguments
-    const { packageWithVersion, pathToPackageJson, repo, branch, title } =
-      await getInputArguments();
-
-    // Create api instance
-    const api = new BitBucketApi(repo);
+    const {
+      packageWithVersion,
+      pathToPackageJson,
+      branch,
+      title,
+      srcBranch,
+      destFile,
+    } = options;
 
     // Read original package.json file
     console.log("Reading original package.json...");
@@ -41,5 +41,3 @@ async function main() {
     console.error(err);
   }
 }
-
-main();
