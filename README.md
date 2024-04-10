@@ -54,3 +54,8 @@ yarn lint
 3. Use cli library - ✅
 4. Add validation - ✅
 5. Add a linter - ✅
+
+## Future plans
+
+1. Extend application features
+2. Cover all existing functionality with **high** quality tests

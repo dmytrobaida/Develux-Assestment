@@ -1,5 +1,6 @@
 import { processPackageJson } from "../parse";
 
+// TODO: Create one or several files with common variables needed for testing
 const json1 = JSON.stringify({});
 const json2 = JSON.stringify({ dependencies: {} });
 const json3 = JSON.stringify({ dependencies: { package: "0.0.0" } });
