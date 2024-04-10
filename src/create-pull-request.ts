@@ -39,6 +39,6 @@ export async function createPullRequest(
     // Print result
     console.log("Success!");
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 }

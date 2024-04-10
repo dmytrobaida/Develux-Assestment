@@ -4,14 +4,20 @@ import { getInputArguments } from "./utils/config";
 import { processPackageJson } from "./utils/parse";
 
 async function main() {
-  // Get all command line arguments
-  const options = await getInputArguments();
+  try {
+    // Get all command line arguments
+    const options = await getInputArguments();
 
-  // Create api instance
-  const api = new BitBucketApi(options.repo);
+    // Create api instance
+    const api = new BitBucketApi(options.repo);
 
-  // Create pull request
-  await createPullRequest(api, options, processPackageJson);
+    // Create pull request
+    await createPullRequest(api, options, processPackageJson);
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(err.toString());
+    }
+  }
 }
 
 main();
