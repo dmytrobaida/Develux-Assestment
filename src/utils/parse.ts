@@ -1,3 +1,5 @@
+const keysToLook = ["dependencies", "devDependencies", "peerDependencies"];
+
 export function processPackageJson(
   packageJsonStr: string,
   packageWithVersion: string
@@ -6,7 +8,6 @@ export function processPackageJson(
     throw new Error("You should provide not empty value!");
   }
 
-  const keysToLook = ["dependencies", "devDependencies", "peerDependencies"];
   const [packageName, packageVersion] = packageWithVersion.split("@");
   const packageJson = JSON.parse(packageJsonStr);
 

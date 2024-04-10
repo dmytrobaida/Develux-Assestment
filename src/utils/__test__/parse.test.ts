@@ -21,7 +21,7 @@ describe("processPackageJson", () => {
     [json2, "pack@0.0.0"],
     [json3, "pack@0.0.0"],
   ])(
-    "pass invalid json value throws error",
+    "package name mismatch throws error",
     (json: string, packageName: string) => {
       expect(() => processPackageJson(json, packageName)).toThrow(Error);
     }
