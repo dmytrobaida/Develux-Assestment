@@ -75,13 +75,17 @@ class BitBucketApi {
   }
 
   async readFile(branch, path) {
-    const res = await fetch(`${this.repo}/src/${branch}/${path}`, {
-      headers: {
-        Authorization: getAuthToken(),
-      },
-    });
+    try {
+      const res = await fetch(`${this.repo}/src/${branch}/${path}`, {
+        headers: {
+          Authorization: getAuthToken(),
+        },
+      });
 
-    return await res.text();
+      return await res.text();
+    } catch (err) {
+      throw new Error("Something went wrong!");
+    }
   }
 }
 
