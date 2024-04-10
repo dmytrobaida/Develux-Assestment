@@ -24,7 +24,7 @@ export async function getInputArguments(): Promise<CreatePullRequestOptions> {
   return {
     packageWithVersion: await input({
       message: "Enter package with version you want to update",
-      default: "package@1.0.0",
+      default: "dotenv@1.0.0",
       validate: (value) => {
         return z
           .string()

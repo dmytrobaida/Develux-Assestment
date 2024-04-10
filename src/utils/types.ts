@@ -1,7 +1,7 @@
 export interface ScmApi {
   createCommitFromFile(
     branch: string,
-    file: Buffer,
+    file: string,
     destinationFile: string
   ): Promise<[number, string, string]>;
 
@@ -22,3 +22,8 @@ export type CreatePullRequestOptions = {
   destFile: string;
   srcBranch: string;
 };
+
+export type PackageProcessor = (
+  packageJsonStr: string,
+  packageWithVersion: string
+) => string;

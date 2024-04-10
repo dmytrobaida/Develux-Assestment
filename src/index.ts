@@ -1,6 +1,7 @@
 import { createPullRequest } from "./create-pull-request";
 import { BitBucketApi } from "./utils/api";
 import { getInputArguments } from "./utils/config";
+import { processPackageJson } from "./utils/parse";
 
 async function main() {
   // Get all command line arguments
@@ -10,7 +11,7 @@ async function main() {
   const api = new BitBucketApi(options.repo);
 
   // Create pull request
-  await createPullRequest(api, options);
+  await createPullRequest(api, options, processPackageJson);
 }
 
 main();

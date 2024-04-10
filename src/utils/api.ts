@@ -14,12 +14,14 @@ export class BitBucketApi implements ScmApi {
 
   async createCommitFromFile(
     branch: string,
-    file: Buffer,
+    file: string,
     destinationFile: string
   ): Promise<[number, string, string]> {
     try {
       const formData = new FormData();
-      formData.append(destinationFile, new Blob([file]));
+      const fileContent = Buffer.from(file, "utf-8");
+
+      formData.append(destinationFile, new Blob([fileContent]));
       formData.append("branch", branch);
       formData.append("author", this.commitCreator);
       formData.append(

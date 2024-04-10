@@ -11,6 +11,7 @@ export function processPackageJson(
   packageJsonStr: string,
   packageWithVersion: string
 ) {
+  const keysToLook = ["dependencies", "devDependencies", "peerDependencies"];
   const [packageName, packageVersion] =
     parsePackageWithVersion(packageWithVersion);
   const packageJson = JSON.parse(packageJsonStr);
@@ -19,8 +20,13 @@ export function processPackageJson(
     packageJson.dependencies = {};
   }
 
-  // Update package version
-  packageJson.dependencies[packageName] = packageVersion;
+  for (const key of keysToLook) {
+    if (packageJson[key] != null && packageJson[key][packageName] != null) {
+      // Update package version
+      packageJson.dependencies[packageName] = packageVersion;
+      return JSON.stringify(packageJson, null, 2);
+    }
+  }
 
-  return JSON.stringify(packageJson, null, 2);
+  throw new Error("There are no such packages!");
 }

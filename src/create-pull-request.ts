@@ -1,9 +1,13 @@
-import { processPackageJson } from "./utils/parse";
-import { CreatePullRequestOptions, ScmApi } from "./utils/types";
+import {
+  CreatePullRequestOptions,
+  PackageProcessor,
+  ScmApi,
+} from "./utils/types";
 
 export async function createPullRequest(
   api: ScmApi,
-  options: CreatePullRequestOptions
+  options: CreatePullRequestOptions,
+  packageProcessor: PackageProcessor
 ) {
   try {
     // Get all command line arguments
@@ -22,10 +26,7 @@ export async function createPullRequest(
 
     // Update package json with new package version
     console.log("Updating package.json with new package version...");
-    const fileContent = Buffer.from(
-      processPackageJson(packageJsonStr, packageWithVersion),
-      "utf-8"
-    );
+    const fileContent = packageProcessor(packageJsonStr, packageWithVersion);
 
     // Create new branch with updated package json
     console.log("Creating new branch and commit with new changes...");
