@@ -11,7 +11,13 @@ BITBUCKET_APP_PASSWORD=your_bitbucket_app_pass
 
 You can get app password using this link: [App Password](https://bitbucket.org/account/settings/app-passwords/)
 
-2. Run the script
+2. Install all dependencies
+
+```
+yarn
+```
+
+3. Run the script
 
 ```
 yarn start
@@ -24,6 +30,22 @@ where you may be asked for the following:
 - repo_url - is a BitBucket url where we need to update package.json
 - branch_name - is a name of the branch where we will update package.json and later will use to create pull request
 - pull_request_title - title of pull request
+
+### How to test
+
+To run all tests run following command:
+
+```
+yarn test
+```
+
+### How to run linter
+
+To run linter you need to execute following command:
+
+```
+yarn lint
+```
 
 ## Points to improve
 
