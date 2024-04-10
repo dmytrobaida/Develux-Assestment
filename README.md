@@ -14,10 +14,10 @@ You can get app password using this link: [App Password](https://bitbucket.org/a
 2. Run the script
 
 ```
-yarn start package@1.0.0 path_to/package.json repo_url branch_name pull_request_title
+yarn start
 ```
 
-where:
+where you may be asked for the following:
 
 - package@1.0.0 - is a package name with new version
 - path_to/package.json - is a path to original package.json
