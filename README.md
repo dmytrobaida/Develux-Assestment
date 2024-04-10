@@ -27,8 +27,8 @@ where:
 
 ## Points to improve
 
-1. Move to TypeScript - Done
+1. Move to TypeScript - ✅
 2. Add some tests
-3. Use cli library - Done
-4. Add validation - Done
-5. Add a linter
+3. Use cli library - ✅
+4. Add validation - ✅
+5. Add a linter - ✅

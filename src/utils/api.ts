@@ -36,7 +36,7 @@ export class BitBucketApi {
 
       return [res.status, res.statusText, await res.text()];
     } catch (err) {
-      throw new Error("Something went wrong!");
+      throw new Error(err.toString());
     }
   }
 
@@ -62,7 +62,7 @@ export class BitBucketApi {
 
       return [res.status, res.statusText, await res.text()];
     } catch (err) {
-      throw new Error("Something went wrong!");
+      throw new Error(err.toString());
     }
   }
 
@@ -76,8 +76,7 @@ export class BitBucketApi {
 
       return await res.text();
     } catch (err) {
-      console.log(err);
-      throw new Error("Something went wrong!");
+      throw new Error(err.toString());
     }
   }
 }
