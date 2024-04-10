@@ -28,7 +28,7 @@ where you may be asked for the following:
 ## Points to improve
 
 1. Move to TypeScript - ✅
-2. Add some tests
+2. Add some tests - ✅
 3. Use cli library - ✅
 4. Add validation - ✅
 5. Add a linter - ✅

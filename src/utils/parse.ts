@@ -1,4 +1,8 @@
 export function parsePackageWithVersion(packageWithVersion: string) {
+  if (packageWithVersion == null || packageWithVersion.trim() === "") {
+    throw new Error("You should provide not empty value!");
+  }
+
   return packageWithVersion.split("@");
 }
 
