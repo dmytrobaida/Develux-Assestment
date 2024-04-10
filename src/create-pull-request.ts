@@ -1,5 +1,5 @@
-const { BitBucketApi } = require("./utils/api");
-const { parsePackageWithVersion } = require("./utils/parse");
+import { BitBucketApi } from "./utils/api";
+import { processPackageJson } from "./utils/parse";
 
 // Hardcoded it because we only change package json
 const destFile = "package.json";
@@ -29,20 +29,6 @@ async function main() {
   } catch (err) {
     console.error(err);
   }
-}
-
-function processPackageJson(packageJsonStr, packageWithVersion) {
-  const [package, version] = parsePackageWithVersion(packageWithVersion);
-  const packageJson = JSON.parse(packageJsonStr);
-
-  if (packageJson.dependencies == null) {
-    packageJson.dependencies = {};
-  }
-
-  // Update package version
-  packageJson.dependencies[package] = version;
-
-  return JSON.stringify(packageJson, null, 2);
 }
 
 main();

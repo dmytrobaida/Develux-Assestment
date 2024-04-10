@@ -1,29 +1,21 @@
-const { getAuthToken } = require("./config");
+import { getAuthToken } from "./config";
 
-class BitBucketApi {
-  constructor(repo) {
+export class BitBucketApi {
+  private repo: string;
+  private commitCreator: string;
+  private commitMessageBase: string;
+
+  constructor(repo: string) {
     this.repo = repo;
     this.commitCreator = "Automated System <auto@develux.com>";
     this.commitMessageBase = "Automated commit";
   }
 
-  async readPullRequests() {
-    try {
-      const res = await fetch(`${this.repo}/pullrequests`, {
-        method: "GET",
-        headers: {
-          Authorization: getAuthToken(),
-          Accept: "application/json",
-        },
-      });
-
-      return await res.json();
-    } catch (err) {
-      throw new Error("Something went wrong!");
-    }
-  }
-
-  async createCommitFromFile(branch, file, destinationFile) {
+  async createCommitFromFile(
+    branch: string,
+    file: Buffer,
+    destinationFile: string
+  ) {
     try {
       const formData = new FormData();
       formData.append(destinationFile, new Blob([file]));
@@ -48,7 +40,7 @@ class BitBucketApi {
     }
   }
 
-  async createPullRequest(branch, title) {
+  async createPullRequest(branch: string, title: string) {
     try {
       const data = {
         title: title,
@@ -74,7 +66,7 @@ class BitBucketApi {
     }
   }
 
-  async readFile(branch, path) {
+  async readFile(branch: string, path: string) {
     try {
       const res = await fetch(`${this.repo}/src/${branch}/${path}`, {
         headers: {
@@ -84,11 +76,8 @@ class BitBucketApi {
 
       return await res.text();
     } catch (err) {
+      console.log(err);
       throw new Error("Something went wrong!");
     }
   }
 }
-
-module.exports = {
-  BitBucketApi,
-};

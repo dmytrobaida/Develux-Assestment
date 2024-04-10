@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/create-pull-request.js"
+    "start": "tsx --env-file=.env src/create-pull-request.ts"
   },
   "license": "MIT",
-  "dependencies": {
-    "dotenv": "^16.4.5"
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "tsx": "^4.7.2"
   }
 }

@@ -24,3 +24,11 @@ where:
 - repo_url - is a BitBucket url where we need to update package.json
 - branch_name - is a name of the branch where we will update package.json and later will use to create pull request
 - pull_request_title - title of pull request
+
+## Points to improve
+
+1. Move to TypeScript - Done
+2. Add some tests
+3. Use cli library
+4. Add validation
+5. Add a linter
