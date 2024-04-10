@@ -29,6 +29,6 @@ where:
 
 1. Move to TypeScript - Done
 2. Add some tests
-3. Use cli library
+3. Use cli library - Done
 4. Add validation
 5. Add a linter

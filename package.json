@@ -6,7 +6,9 @@
     "start": "tsx --env-file=.env src/create-pull-request.ts"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@inquirer/prompts": "^4.3.2"
+  },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "tsx": "^4.7.2"
