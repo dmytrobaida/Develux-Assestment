@@ -1,16 +1,37 @@
-import { parsePackageWithVersion } from "../parse";
+import { processPackageJson } from "../parse";
 
-describe("parsePackageWithVersion", () => {
+const json1 = JSON.stringify({});
+const json2 = JSON.stringify({ dependencies: {} });
+const json3 = JSON.stringify({ dependencies: { package: "0.0.0" } });
+
+const validPackage = "package@0.0.1";
+const jsonResult = JSON.stringify(
+  { dependencies: { package: "0.0.1" } },
+  null,
+  2
+);
+
+describe("processPackageJson", () => {
   test.each([null, "", " "])("pass empty value throws error", (input: any) => {
-    expect(() => parsePackageWithVersion(input)).toThrow(Error);
+    expect(() => processPackageJson("", input)).toThrow(Error);
   });
 
   test.each([
-    ["test@0.0.1", ["test", "0.0.1"]],
-    ["package@1.0.1", ["package", "1.0.1"]],
-    ["a@0.0", ["a", "0.0"]],
-  ])("pass valid value returns valid result", (input, output) => {
-    const res = parsePackageWithVersion(input);
-    expect(res).toStrictEqual(output);
-  });
+    [json1, "pack@0.0.0"],
+    [json2, "pack@0.0.0"],
+    [json3, "pack@0.0.0"],
+  ])(
+    "pass invalid json value throws error",
+    (json: string, packageName: string) => {
+      expect(() => processPackageJson(json, packageName)).toThrow(Error);
+    }
+  );
+
+  test.each([[json3, validPackage, jsonResult]])(
+    "pass valid value returns valid result",
+    (json: string, pack: string, result: string) => {
+      const res = processPackageJson(json, pack);
+      expect(res).toEqual(result);
+    }
+  );
 });
